@@ -25,6 +25,11 @@ def get_embedding_list(faces):
     data = data / 255.
     return encoder.predict(data)
 
+def get_boxes(image):
+    detected_faces = face_detector(image, 1)
+    face_frames = [(x.left(), x.top(),x.right(), x.bottom()) for x in detected_faces]
+    return face_frames
+
 def get_faces(image):
     faces = []
     detected_faces = face_detector(image, 1)
@@ -35,6 +40,7 @@ def get_faces(image):
         img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         faces.append(np.expand_dims(img, 0))
         cv2.rectangle(image, (left, top), (right, bottom), (255,0,0), 2)
+        cv2.putText(image, 'name', (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
     return faces
 
 def get_known_encodings(folder):
