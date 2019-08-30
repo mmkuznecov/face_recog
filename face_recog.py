@@ -34,6 +34,7 @@ def get_faces(image):
         img = cv2.resize(img, (64, 64))
         img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         faces.append(np.expand_dims(img, 0))
+        cv2.rectangle(image, (left, top), (right, bottom), (255,0,0), 2)
     return faces
 
 def get_known_encodings(folder):
