@@ -12,8 +12,7 @@ def compare_faces(encodings, known_encodings, known_names, threshold = 40):
     names = []
     for i in range(len(encodings)):
         dists = [np.sum(np.square(encodings[i] - known_enc)) for known_enc in known_encodings]
-        dist = min(dists)
-        if dist > threshold:
+        if min(dists) > threshold:
             names.append('Unknown')
         else:
             names.append(known_names[i])
@@ -39,7 +38,19 @@ def get_faces(image):
         img = cv2.resize(img, (64, 64))
         img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         faces.append(np.expand_dims(img, 0))
-        cv2.rectangle(image, (left, top), (right, bottom), (255,0,0), 2)
+        #cv2.rectangle(image, (left, top), (right, bottom), (255,0,0), 2)
+        
+        fr = int((bottom - top) / 4)
+
+        cv2.line(image, (left, top), (left, top+fr), (0, 0, 255), 3)
+        cv2.line(image, (left, bottom-fr), (left, bottom), (0, 0, 255), 3)
+        cv2.line(image, (right, top), (right, top+fr), (0, 0, 255), 3)
+        cv2.line(image, (right, bottom-fr), (right, bottom), (0, 0, 255), 3)
+        cv2.line(image, (left, top), (left+fr, top), (0, 0, 255), 3)
+        cv2.line(image, (right, top), (right-fr, top), (0, 0, 255), 3)
+        cv2.line(image, (left, bottom), (left+fr, bottom), (0, 0, 255), 3)
+        cv2.line(image, (right, bottom), (right-fr, bottom), (0, 0, 255), 3)
+
         cv2.putText(image, 'name', (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
     return faces
 
@@ -57,3 +68,22 @@ def get_known_encodings(folder):
             encodings.append(get_embedding_list(get_faces(face))[0])
             names.append(image.split('.')[0])
     return (encodings, names)
+
+def boxes_and_names(boxes, names):
+    
+    for i in range(len(boxes)):
+        
+        (left, top, right, bottom) = boxes[i]
+
+        fr = int((bottom - top) / 4)
+
+        cv2.line(image, (left, top), (left, top+fr), (0, 0, 255), 3)
+        cv2.line(image, (left, bottom-fr), (left, bottom), (0, 0, 255), 3)
+        cv2.line(image, (right, top), (right, top+fr), (0, 0, 255), 3)
+        cv2.line(image, (right, bottom-fr), (right, bottom), (0, 0, 255), 3)
+        cv2.line(image, (left, top), (left+fr, top), (0, 0, 255), 3)
+        cv2.line(image, (right, top), (right-fr, top), (0, 0, 255), 3)
+        cv2.line(image, (left, bottom), (left+fr, bottom), (0, 0, 255), 3)
+        cv2.line(image, (right, bottom), (right-fr, bottom), (0, 0, 255), 3)
+
+        cv2.putText(image, names[i], (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
