@@ -17,6 +17,8 @@ while True:
         i += 1
         print('image was added ' + str(i - 1))
         time.sleep(0.9)
+        if i - 1 == 100000:
+            break
     except Exception as e:
         print('problem with connection')
         print(e)

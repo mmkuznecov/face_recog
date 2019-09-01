@@ -39,19 +39,6 @@ def get_faces(image):
         img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         faces.append(np.expand_dims(img, 0))
         #cv2.rectangle(image, (left, top), (right, bottom), (255,0,0), 2)
-        
-        fr = int((bottom - top) / 4)
-
-        cv2.line(image, (left, top), (left, top+fr), (0, 0, 255), 3)
-        cv2.line(image, (left, bottom-fr), (left, bottom), (0, 0, 255), 3)
-        cv2.line(image, (right, top), (right, top+fr), (0, 0, 255), 3)
-        cv2.line(image, (right, bottom-fr), (right, bottom), (0, 0, 255), 3)
-        cv2.line(image, (left, top), (left+fr, top), (0, 0, 255), 3)
-        cv2.line(image, (right, top), (right-fr, top), (0, 0, 255), 3)
-        cv2.line(image, (left, bottom), (left+fr, bottom), (0, 0, 255), 3)
-        cv2.line(image, (right, bottom), (right-fr, bottom), (0, 0, 255), 3)
-
-        cv2.putText(image, 'name', (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
     return faces
 
 def get_known_encodings(folder):
@@ -69,7 +56,7 @@ def get_known_encodings(folder):
             names.append(image.split('.')[0])
     return (encodings, names)
 
-def boxes_and_names(boxes, names):
+def boxes_and_names(image, boxes, names):
     
     for i in range(len(boxes)):
         
