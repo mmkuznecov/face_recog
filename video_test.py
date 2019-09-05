@@ -10,9 +10,22 @@ cap = cv2.VideoCapture(0)
 while True:
 
     _, frame = cap.read()
-    a = get_faces(frame)
-    print(a)
-    cv2.imshow('vid', frame)
+
+    try:
+        boxes = get_boxes(frame)
+
+        faces = get_faces(frame)
+
+        encodings = get_embedding_list(faces)
+
+        names = compare_faces(encodings, known_encodings, known_names)
+
+        boxes_and_names(frame, boxes, names)
+
+    except:
+        pass
+
+    cv2.imshow('recog', frame)
 
     if cv2.waitKey(1) == ord('q'):
         break

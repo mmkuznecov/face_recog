@@ -1,17 +1,19 @@
 import cv2
 from scipy.spatial import distance
 import numpy as np
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from dlib import get_frontal_face_detector
 import os
 
-encoder = load_model('models/encoder_model.h5')
+encoder = load_model('models/encoder_model_3.h5')
 face_detector = get_frontal_face_detector()
 
-def compare_faces(encodings, known_encodings, known_names, threshold = 40):
+def compare_faces(encodings, known_encodings, known_names, threshold = 75):
     names = []
     for i in range(len(encodings)):
         dists = [np.sum(np.square(encodings[i] - known_enc)) for known_enc in known_encodings]
+        print(dists)
+        print('Min dist: ' + str(min(dists)))
         if min(dists) > threshold:
             names.append('Unknown')
         else:
