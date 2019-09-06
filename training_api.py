@@ -10,7 +10,7 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("-f", "--folder", type=str,
 	help="folder with faces dataset")
-ap.add_argument("-n", "--epochs-number", type=int,
+ap.add_argument("-n", "--epochs", type=int,
 	help="number of epochs to train", default=10)
 args = vars(ap.parse_args())
 
@@ -72,13 +72,13 @@ def train(folder=args['folder']):
     print('Summary about model:')
 
     autoencoder.summary()    
-    plot_model(autoencoder, to_file='model.png', show_shapes = True, show_layer_names = True, expand_nested = True)
+    plot_model(autoencoder, to_file='model.png', show_shapes = True, show_layer_names = True)
     print('Pipeline of the model saved to model.png')
     print('================================')
     print('starting training')
 
     autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
-    autoencoder.fit(faces, faces, epochs = args['epochs-number'])
+    autoencoder.fit(faces, faces, epochs = args['epochs'])
 
     print('Saving encoder model...')
     encoder.save('encoder_model.h5')
