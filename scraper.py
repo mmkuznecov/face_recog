@@ -13,7 +13,7 @@ while True:
         img = cv2.imdecode(arr, -1)
         img = cv2.resize(img, (128, 128))
 
-        cv2.imwrite('./faces_imgs/' + str(i)+'.jpeg', img)
+        cv2.imwrite('.faces_imgs/' + str(i)+'.jpeg', img)
         i += 1
         print('image was added ' + str(i - 1))
         time.sleep(0.9)
