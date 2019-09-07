@@ -2,6 +2,9 @@ import cv2
 from scipy.spatial import distance
 import numpy as np
 from tensorflow.keras.models import load_model
+from tensorflow.keras.layers import Conv2D, Conv2DTranspose, Flatten, Input, Dense, Reshape
+from tensorflow.keras import Model
+from tensorflow.keras.utils import plot_model
 from dlib import get_frontal_face_detector
 import os
 import argparse
