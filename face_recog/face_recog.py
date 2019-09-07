@@ -6,7 +6,9 @@ from dlib import get_frontal_face_detector
 import os
 import argparse
 
-encoder = load_model('models/encoder_model_3.h5')
+def init_model(path):
+    encoder = load_model(path)
+
 face_detector = get_frontal_face_detector()
 
 def compare_faces(encodings, known_encodings, known_names, threshold = 51):
@@ -21,7 +23,7 @@ def compare_faces(encodings, known_encodings, known_names, threshold = 51):
             names.append(known_names[i])
     return names
 
-def get_embedding_list(faces):
+def get_embedding_list(faces, encoder):
     data = np.concatenate(faces, axis=0)
     data = np.expand_dims(data, -1)
     data = data / 255.
