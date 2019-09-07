@@ -5,6 +5,7 @@ from tensorflow.keras.models import load_model
 from dlib import get_frontal_face_detector
 import os
 import argparse
+from tqdm import tqdm
 
 def init_model(path):
     encoder = load_model(path)
