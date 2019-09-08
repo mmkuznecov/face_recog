@@ -10,9 +10,7 @@ import os
 import argparse
 from tqdm import tqdm
 
-def init_model(path):
-    encoder = load_model(path)
-
+encoder = load_model('encoder_model.h5')
 face_detector = get_frontal_face_detector()
 
 def compare_faces(encodings, known_encodings, known_names, threshold = 51):
@@ -27,7 +25,7 @@ def compare_faces(encodings, known_encodings, known_names, threshold = 51):
             names.append(known_names[i])
     return names
 
-def get_embedding_list(faces, encoder):
+def get_embedding_list(faces):
     data = np.concatenate(faces, axis=0)
     data = np.expand_dims(data, -1)
     data = data / 255.
