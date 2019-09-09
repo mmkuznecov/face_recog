@@ -88,6 +88,8 @@ def train_encoder():
         help="folder with faces dataset")
     ap.add_argument("-n", "--epochs", type=int,
         help="number of epochs to train", default=10)
+    ap.add_argument("-p", "--path", type=str,
+        help="path to save the model", default='encoder_model.h5')
     args = vars(ap.parse_args())
 
     folder = args["folder"]
@@ -158,4 +160,4 @@ def train_encoder():
     autoencoder.fit(faces, faces, epochs = args['epochs'])
 
     print('Saving encoder model...')
-    encoder.save('encoder_model.h5')
+    encoder.save(args['path'])
