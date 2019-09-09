@@ -151,7 +151,7 @@ def train_encoder():
     print('Summary about model:')
 
     autoencoder.summary()    
-    plot_model(autoencoder, to_file='model.png', show_shapes = True, show_layer_names = True)
+    #plot_model(autoencoder, to_file='model.png', show_shapes = True, show_layer_names = True)
     print('Pipeline of the model saved to model.png')
     print('================================')
     print('starting training')
