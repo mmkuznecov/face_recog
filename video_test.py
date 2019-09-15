@@ -1,4 +1,4 @@
-from face_recog import *
+from face_recog_lib import *
 import cv2
 
 known_encodings, known_names = get_known_encodings('faces')

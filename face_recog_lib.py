@@ -5,10 +5,10 @@ from tensorflow.keras.models import load_model
 from dlib import get_frontal_face_detector
 import os
 
-encoder = load_model('models/encoder_model_3.h5')
+encoder = load_model('models/cropped_encoder.h5')
 face_detector = get_frontal_face_detector()
 
-def compare_faces(encodings, known_encodings, known_names, threshold = 51):
+def compare_faces(encodings, known_encodings, known_names, threshold = 130):
     names = []
     for i in range(len(encodings)):
         dists = [np.sum(np.square(encodings[i] - known_enc)) for known_enc in known_encodings]

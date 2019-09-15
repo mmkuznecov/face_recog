@@ -1,4 +1,4 @@
-from face_recog import *
+from face_recog_lib import *
 import cv2
 import matplotlib.pyplot as plt
 
