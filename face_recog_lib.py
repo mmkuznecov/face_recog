@@ -13,11 +13,12 @@ def compare_faces(encodings, known_encodings, known_names, threshold = 40):
     for i in range(len(encodings)):
         dists = [np.sum(np.square(encodings[i] - known_enc)) for known_enc in known_encodings]
         print(dists)
+        ind = dists.index(min(dists))
         print('Min dist: ' + str(min(dists)))
         if min(dists) > threshold:
             names.append('Unknown')
         else:
-            names.append(known_names[i])
+            names.append(known_names[ind])
     return names
 
 def get_embedding_list(faces):
