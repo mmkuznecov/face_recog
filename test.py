@@ -2,7 +2,7 @@ from face_recog_lib import *
 import cv2
 import matplotlib.pyplot as plt
 
-image = cv2.imread('fa.jpg')
+image = cv2.imread('example.jpg')
 
 known_encodings, known_names = get_known_encodings('faces')
 
